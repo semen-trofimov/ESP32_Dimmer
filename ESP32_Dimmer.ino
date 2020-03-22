@@ -49,6 +49,8 @@ char ssid[] = "asus";
 char pass[] = "t9indigo";
 
 
+WidgetTerminal terminal(V5);
+
 
 dimmerLampESP32 dimmer(outPin, ZCPin); //initialase port for dimmer 
 
@@ -62,6 +64,8 @@ BLYNK_WRITE(V1)
   // double d = param.asDouble();
   Serial.print("V1 Slider value is: ");
   Serial.println(outVal);
+  terminal.print("V1 Slider value is: ");
+  terminal.println(outVal);
 }
 
 void setup()
