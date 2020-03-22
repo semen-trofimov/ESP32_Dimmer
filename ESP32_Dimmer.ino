@@ -54,10 +54,14 @@ dimmerLampESP32 dimmer(outPin, ZCPin); //initialase port for dimmer
 
 int outVal = 0;
 
-BLYNK_WRITE(V50)
+BLYNK_WRITE(V1)
 {
-int pinValue = param.asInt(); // присваиваем входящее значение с контакта V1 переменной
-// обработать полученное значение
+  int outVal = param.asInt(); // assigning incoming value from pin V1 to a variable
+  // You can also use:
+  // String i = param.asStr();
+  // double d = param.asDouble();
+  Serial.print("V1 Slider value is: ");
+  Serial.println(outVal);
 }
 
 void setup()
@@ -74,7 +78,5 @@ void loop()
 {
   Blynk.run();
   
-  outVal = V50;  
-  Serial.println(outVal); 
   dimmer.setPower(outVal); // name.setPower(0%-100%)
 }
