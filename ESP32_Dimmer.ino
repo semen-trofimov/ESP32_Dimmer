@@ -31,8 +31,8 @@
 
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
-#define zerocross 4
-#define outputPin 14
+#define outPin  4 // GPIO for dimming, don't use pins 28(GPIO9), 29(GPIO10), 30(GPIO11), 31(GPIO6), 33(GPIO8), 5(GPIO36), 8(GPIO39), 10(GPIO34), 11(GPIO35), 32(GPIO7) 
+#define ZCPin   14 // GPIO for Zero-Cross, don't use pins 28(GPIO9), 29(GPIO10), 30(GPIO11), 31(GPIO6), 33(GPIO8)
 
 #include <WiFi.h>
 #include <WiFiClient.h>
@@ -50,7 +50,7 @@ char pass[] = "t9indigo";
 
 
 
-dimmerLamp dimmer(outputPin, zerocross);
+dimmerLampESP32 dimmer(outPin, ZCPin); //initialase port for dimmer 
 
 int outVal = 0;
 
@@ -73,6 +73,8 @@ void setup()
 void loop()
 {
   Blynk.run();
-  outVal = V50;
+  
+  outVal = V50;  
+  Serial.println(outVal); 
   dimmer.setPower(outVal); // name.setPower(0%-100%)
 }
