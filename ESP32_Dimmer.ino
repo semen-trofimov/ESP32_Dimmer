@@ -37,7 +37,7 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
-#include <RBDmcuESP32.h>
+#include <RBDdimmerESP32.h>
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
