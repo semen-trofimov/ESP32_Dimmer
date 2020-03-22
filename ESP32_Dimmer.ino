@@ -31,11 +31,13 @@
 
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
-
+#define zerocross 4
+#define outputPin 14
 
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
+#include <RBDmcuESP32.h>
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -46,15 +48,31 @@ char auth[] = "GFEJ3Eu9Ji-7B3Aqmz517nYQ5UrkV_rc";
 char ssid[] = "asus";
 char pass[] = "t9indigo";
 
+
+
+dimmerLamp dimmer(outputPin, zerocross);
+
+int outVal = 0;
+
+BLYNK_WRITE(V50)
+{
+int pinValue = param.asInt(); // присваиваем входящее значение с контакта V1 переменной
+// обработать полученное значение
+}
+
 void setup()
 {
   // Debug console
   Serial.begin(9600);
 
   Blynk.begin(auth, ssid, pass);
+  
+  dimmer.begin(NORMAL_MODE, ON);
 }
 
 void loop()
 {
   Blynk.run();
+  outVal = V50;
+  dimmer.setPower(outVal); // name.setPower(0%-100%)
 }
